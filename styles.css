@@ -1,0 +1,42 @@
+:root {
+    --primary: #1e3a8a; --secondary: #2563eb; --dark: #0f172a;
+    --light: #f8fafc; --calc-bg: #1e293b; --success: #10b981;
+    --error: #ef4444; --warning: #f59e0b;
+}
+
+body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f1f5f9; }
+
+.header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; text-align: center; padding: 40px; }
+
+.navbar { display: flex; background: var(--dark); position: sticky; top: 0; z-index: 1000; }
+.navbar button { flex: 1; padding: 15px; border: none; background: transparent; color: #94a3b8; cursor: pointer; font-weight: bold; }
+.navbar button.active { color: white; border-bottom: 3px solid var(--secondary); }
+
+.main-container { max-width: 1000px; margin: 20px auto; padding: 20px; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; animation: fadeIn 0.5s; }
+
+.card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 20px; }
+.theory-card { border-left: 5px solid var(--secondary); background: var(--light); padding: 15px; margin: 10px 0; border-radius: 0 8px 8px 0; }
+.formula-box { background: white; padding: 10px; text-align: center; font-size: 1.3em; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; }
+
+/* Calculadora */
+.calc-wrapper { max-width: 400px; margin: 0 auto; background: var(--calc-bg); padding: 20px; border-radius: 15px; }
+#calc-display { width: 100%; height: 60px; background: #000; color: #0f0; text-align: right; font-size: 1.8em; padding: 10px; box-sizing: border-box; margin-bottom: 15px; }
+.calc-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.calc-grid button { padding: 15px 5px; border-radius: 5px; border: none; cursor: pointer; font-weight: bold; }
+.btn-op { background: var(--warning); }
+.btn-eq { background: var(--success); grid-column: span 2; }
+.btn-ac { background: var(--error); color: white; }
+
+/* Quizz */
+.quizz-header { display: flex; justify-content: space-around; background: #eee; padding: 10px; border-radius: 8px; margin-bottom: 15px; }
+.option-btn { width: 100%; padding: 12px; margin: 5px 0; border: 1px solid #ddd; cursor: pointer; background: white; border-radius: 5px; text-align: left; }
+.option-btn:hover { background: #f0f4ff; border-color: var(--secondary); }
+
+/* Videos */
+.grid-videos { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; }
+.video-box { position: relative; padding-bottom: 56.25%; height: 0; }
+.video-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 10px; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }

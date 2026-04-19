@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Engineer Pro - Proyecto Final</title>
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="header">
+    <h1>MATH ENGINEER PRO</h1>
+    <p>Plataforma Académica de Ecuaciones Diferenciales</p>
+</div>
+
+<nav class="navbar">
+    <button onclick="switchTab('tab-inicio')" class="tab-btn active">INICIO</button>
+    <button onclick="switchTab('tab-teoria')" class="tab-btn">TEORÍA</button>
+    <button onclick="switchTab('tab-calc')" class="tab-btn">CALCULADORA</button>
+    <button onclick="switchTab('tab-quizz')" class="tab-btn">QUIZZ</button>
+    <button onclick="switchTab('tab-videos')" class="tab-btn">VIDEOS</button>
+</nav>
+
+<div class="main-container">
+
+    <section id="tab-inicio" class="tab-panel active">
+        <div class="card">
+            <h2>Bienvenido al Portal</h2>
+            <p>Esta herramienta ha sido diseñada para estudiantes de ingeniería que buscan dominar las Ecuaciones Diferenciales y Métodos Numéricos.</p>
+            
+            <div class="theory-card">
+                <h3>Resumen: Ecuaciones Diferenciales</h3>
+                <div class="formula-box">$$\frac{dy}{dx} = f(x,y)$$</div>
+            </div>
+
+            <div class="theory-card">
+                <h3>Resumen: Laplace</h3>
+                <div class="formula-box">$$\mathcal{L}\{f(t)\} = F(s)$$</div>
+            </div>
+
+            <div class="theory-card">
+                <h3>Resumen: Euler</h3>
+                <div class="formula-box">$$y_{n+1} = y_n + h f(x_n, y_n)$$</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tab-teoria" class="tab-panel">
+        <div class="card">
+            <h2>Cuerpo de Conocimiento</h2>
+            
+            <h3>1. Clasificación de ED</h3>
+            <div class="theory-card">
+                <p>Clasificación por <strong>Tipo</strong>, <strong>Orden</strong> y <strong>Linealidad</strong>.</p>
+            </div>
+
+            <h3>2. ED Lineales y Bernoulli</h3>
+            <div class="theory-card">
+                <div class="formula-box">$$\mu(x) = e^{\int P(x)dx}$$</div>
+                <div class="example-box">Sustitución de Bernoulli: \(u = y^{1-n}\)</div>
+            </div>
+
+            <h3>3. Transformada de Laplace</h3>
+            <div class="theory-card">
+                <p>Traslación: \(\mathcal{L}\{e^{at}f(t)\} = F(s-a)\)</p>
+                <p>Derivada: \(\mathcal{L}\{y'\} = sY(s) - y(0)\)</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="tab-calc" class="tab-panel">
+        <div class="calc-wrapper">
+            <input type="text" id="calc-display" readonly value="0">
+            <div class="calc-grid">
+                <button onclick="cFunc('Math.sin')">sin</button>
+                <button onclick="cFunc('Math.cos')">cos</button>
+                <button onclick="cFunc('Math.tan')">tan</button>
+                <button class="btn-ac" onclick="cClear()">AC</button>
+                <button class="btn-ac" onclick="cBack()">DEL</button>
+                <button onclick="cAdd('**')">x^y</button>
+                <button class="btn-op" onclick="cAdd('/')">/</button>
+                <button onclick="cAdd('7')">7</button>
+                <button onclick="cAdd('8')">8</button>
+                <button onclick="cAdd('9')">9</button>
+                <button class="btn-op" onclick="cAdd('*')">×</button>
+                <button onclick="cAdd('4')">4</button>
+                <button onclick="cAdd('5')">5</button>
+                <button onclick="cAdd('6')">6</button>
+                <button class="btn-op" onclick="cAdd('-')">−</button>
+                <button onclick="cAdd('1')">1</button>
+                <button onclick="cAdd('2')">2</button>
+                <button onclick="cAdd('3')">3</button>
+                <button class="btn-op" onclick="cAdd('+')">+</button>
+                <button class="btn-eq" onclick="cEval()">=</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="tab-quizz" class="tab-panel">
+        <div class="card" id="quiz-intro">
+            <h2>Reto de Ingeniería</h2>
+            <div class="quiz-options">
+                <button class="option-btn" onclick="initQuiz('ed')">Ecuaciones Diferenciales</button>
+                <button class="option-btn" onclick="initQuiz('laplace')">Transformada de Laplace</button>
+                <button class="option-btn" onclick="initQuiz('euler')">Método de Euler</button>
+            </div>
+        </div>
+
+        <div class="card" id="quiz-body" style="display:none">
+            <div class="quizz-header">
+                <span>Pregunta: <b id="q-idx">1</b>/10</span>
+                <span>Aciertos: <b id="q-ok">0</b></span>
+            </div>
+            <h3 id="q-text"></h3>
+            <div id="q-options"></div>
+            <p id="q-feedback"></p>
+        </div>
+
+        <div class="card" id="quiz-result" style="display:none; text-align:center">
+            <h2 id="res-title"></h2>
+            <h1 id="res-score"></h1>
+            <button class="btn-op" onclick="exitQuiz()">Reiniciar</button>
+        </div>
+    </section>
+
+    <section id="tab-videos" class="tab-panel">
+        <div class="card">
+            <h3>Videos ED, Laplace y Euler</h3>
+            <div class="grid-videos">
+                <div class="video-box"><iframe src="https://www.youtube.com/embed/giuEYJhb5gU"></iframe></div>
+                <div class="video-box"><iframe src="https://www.youtube.com/embed/8kEz2DSH9BA"></iframe></div>
+                <div class="video-box"><iframe src="https://www.youtube.com/embed/PXdjSYPYLZ4"></iframe></div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
